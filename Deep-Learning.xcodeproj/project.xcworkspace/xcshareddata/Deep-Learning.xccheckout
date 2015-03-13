@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>D78AFF90-101B-4174-8F6D-114D487CE28A</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Deep-Learning</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>342C8F2FC336AD26D2FFB7E7A72AC6AC3AE74709</key>
+		<string>https://github.com/Runemark/deep-learning.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Deep-Learning/Deep-Learning.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>342C8F2FC336AD26D2FFB7E7A72AC6AC3AE74709</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Runemark/deep-learning.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>342C8F2FC336AD26D2FFB7E7A72AC6AC3AE74709</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>342C8F2FC336AD26D2FFB7E7A72AC6AC3AE74709</string>
+			<key>IDESourceControlWCCName</key>
+			<string>deep-learning</string>
+		</dict>
+	</array>
+</dict>
+</plist>
