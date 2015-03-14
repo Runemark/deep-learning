@@ -31,6 +31,11 @@ class Array2D
     //        return description
     //    }
     
+//    convenience init(arrayString:String)
+//    {
+//        // Convert
+//    }
+    
     init(cols:Int, rows:Int) {
         self.cols = cols
         self.rows = rows
@@ -47,6 +52,11 @@ class Array2D
             matrix[cols * row + col] = newValue
         }
     }
+    
+//    func exportArray() -> String
+//    {
+//        
+//    }
     
     func getRow(rowIndex:Int) -> [Float]
     {

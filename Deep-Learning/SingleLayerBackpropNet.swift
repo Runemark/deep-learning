@@ -49,6 +49,8 @@ class SingleLayerBackpropNet
         self.hiddenDeltas = Array<Float>(count:hiddenCount, repeatedValue:0)
         
         initializeWeights()
+        
+        println("initialization complete")
     }
     
     //////////////////////////////////////////////////////////////////////////////////////////
@@ -62,6 +64,7 @@ class SingleLayerBackpropNet
         // Return classification accuracy
         for index in 0..<totalInstances
         {
+            println("testing on instance: \(index)")
             let instance = dataset.getInstance(index)
             let output = classificationForInstance(instance.features)
             let target = targetClassification(instance.targets)
@@ -120,6 +123,7 @@ class SingleLayerBackpropNet
         {
             for index in 0..<trainSet.instanceCount
             {
+                println("training on instance: \(index)")
                 trainOnInstance(trainSet.getInstance(index))
             }
             
@@ -248,7 +252,7 @@ class SingleLayerBackpropNet
     func calculateOutputDelta(index:Int, target:Float) -> Float
     {
         let actual = getActivation(.Output, index:index)
-        return -1 * (target - actual) * sigmoidDerivative(actual)
+        return (target - actual) * sigmoidDerivative(actual)
     }
     
     func calculateHiddenDelta(index:Int) -> Float

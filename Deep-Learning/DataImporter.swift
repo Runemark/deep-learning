@@ -19,7 +19,7 @@ class DataImporter
 {
     func importArffFile(fileName:String) -> Dataset
     {
-        var directory = "\(NSHomeDirectory())/Documents/Research/deep-learning/Deep-Learning/Data/\(fileName).arff"
+        var directory = "\(NSHomeDirectory())/Documents/Research/deep-learning/Data/\(fileName).arff"
         
         var dataset = Dataset()
         

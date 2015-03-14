@@ -10,29 +10,29 @@
 	<string>Deep-Learning</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>342C8F2FC336AD26D2FFB7E7A72AC6AC3AE74709</key>
+		<key>787141B417953D82F7B3A11F7356524DA836372B</key>
 		<string>https://github.com/Runemark/deep-learning.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Deep-Learning/Deep-Learning.xcodeproj</string>
+	<string>Deep-Learning.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>342C8F2FC336AD26D2FFB7E7A72AC6AC3AE74709</key>
-		<string>../../..</string>
+		<key>787141B417953D82F7B3A11F7356524DA836372B</key>
+		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/Runemark/deep-learning.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>342C8F2FC336AD26D2FFB7E7A72AC6AC3AE74709</string>
+	<string>787141B417953D82F7B3A11F7356524DA836372B</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>342C8F2FC336AD26D2FFB7E7A72AC6AC3AE74709</string>
+			<string>787141B417953D82F7B3A11F7356524DA836372B</string>
 			<key>IDESourceControlWCCName</key>
 			<string>deep-learning</string>
 		</dict>
