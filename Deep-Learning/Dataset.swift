@@ -10,8 +10,8 @@ import Foundation
 
 class Dataset
 {
-    var inputs = [[Float]]()
-    var outputs = [[Float]]()
+    var inputs = [[Double]]()
+    var outputs = [[Double]]()
     var instanceCount = 0
     
     init()
@@ -19,14 +19,14 @@ class Dataset
         
     }
     
-    func addInstance(inputVector:[Float], outputVector:[Float])
+    func addInstance(inputVector:[Double], outputVector:[Double])
     {
         inputs.append(inputVector)
         outputs.append(outputVector)
         instanceCount++
     }
     
-    func getInstance(index:Int) -> (features:[Float], targets:[Float])
+    func getInstance(index:Int) -> (features:[Double], targets:[Double])
     {
         return (features:inputs[index], targets:outputs[index])
     }

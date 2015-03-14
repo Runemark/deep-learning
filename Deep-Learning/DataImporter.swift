@@ -38,7 +38,7 @@ class DataImporter
                 if (dataSection && !line.isEmpty)
                 {
                     let components = line.componentsSeparatedByString(",")
-                    var instance = (features:[Float](), targets:[Float]())
+                    var instance = (features:[Double](), targets:[Double]())
                     
                     for (index:Int, element:String) in enumerate(components)
                     {
@@ -47,7 +47,7 @@ class DataImporter
                         {
                             if (index < featureCount)
                             {
-                                instance.features.append(Float(value)/255.0)
+                                instance.features.append(Double(value)/255.0)
                             }
                             else
                             {
@@ -55,11 +55,11 @@ class DataImporter
                                 {
                                     if n == value
                                     {
-                                        instance.targets.append(Float(1))
+                                        instance.targets.append(Double(1))
                                     }
                                     else
                                     {
-                                        instance.targets.append(Float(0))
+                                        instance.targets.append(Double(0))
                                     }
                                 }
                             }

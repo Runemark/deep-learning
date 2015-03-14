@@ -12,29 +12,7 @@ import Foundation
 class Array2D
 {
     var cols:Int, rows:Int
-    var matrix:[Float]
-    
-    // (Requires subclassing NSObject)
-    //    override var description : String {
-    //
-    //        var description = "cols = \(cols)\nrows = \(rows)\n"
-    //        for x in 0..<rows
-    //        {
-    //            description += "[\(x)]"
-    //            for y in 0..<cols
-    //            {
-    //                description += " \(y):\(matrix[cols * x + y])"
-    //            }
-    //            description += "\n"
-    //        }
-    //
-    //        return description
-    //    }
-    
-//    convenience init(arrayString:String)
-//    {
-//        // Convert
-//    }
+    var matrix:[Double]
     
     init(cols:Int, rows:Int) {
         self.cols = cols
@@ -42,7 +20,7 @@ class Array2D
         matrix = Array(count:cols*rows, repeatedValue:0)
     }
     
-    subscript(row:Int, col:Int) -> Float {
+    subscript(row:Int, col:Int) -> Double {
         get
         {
             return matrix[cols * row + col]
@@ -53,14 +31,9 @@ class Array2D
         }
     }
     
-//    func exportArray() -> String
-//    {
-//        
-//    }
-    
-    func getRow(rowIndex:Int) -> [Float]
+    func getRow(rowIndex:Int) -> [Double]
     {
-        var row = [Float]()
+        var row = [Double]()
         for colIndex in 0..<cols
         {
             row.append(matrix[cols*rowIndex + colIndex])
@@ -69,9 +42,9 @@ class Array2D
         return row
     }
     
-    func getCol(colIndex:Int) -> [Float]
+    func getCol(colIndex:Int) -> [Double]
     {
-        var col = [Float]()
+        var col = [Double]()
         for rowIndex in 0..<rows
         {
             col.append(matrix[cols*rowIndex + colIndex])
@@ -80,7 +53,7 @@ class Array2D
         return col
     }
     
-    func toVector() -> [Float]
+    func toVector() -> [Double]
     {
         return matrix
     }

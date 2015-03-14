@@ -13,6 +13,7 @@
 		5B70599A1AB28871004BB0FE /* SingleLayerBackpropNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7059991AB28871004BB0FE /* SingleLayerBackpropNet.swift */; };
 		5B70599C1AB288B4004BB0FE /* Array2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B70599B1AB288B4004BB0FE /* Array2D.swift */; };
 		5B9D74771AB377A80051DF58 /* NetworkExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9D74761AB377A80051DF58 /* NetworkExporter.swift */; };
+		5BBF9B921AB3F940005DFBFA /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BBF9B911AB3F940005DFBFA /* Accelerate.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,6 +36,7 @@
 		5B7059991AB28871004BB0FE /* SingleLayerBackpropNet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleLayerBackpropNet.swift; sourceTree = "<group>"; };
 		5B70599B1AB288B4004BB0FE /* Array2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array2D.swift; sourceTree = "<group>"; };
 		5B9D74761AB377A80051DF58 /* NetworkExporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkExporter.swift; sourceTree = "<group>"; };
+		5BBF9B911AB3F940005DFBFA /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BBF9B921AB3F940005DFBFA /* Accelerate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,6 +54,7 @@
 		5B7059801AB25CE9004BB0FE = {
 			isa = PBXGroup;
 			children = (
+				5BBF9B911AB3F940005DFBFA /* Accelerate.framework */,
 				5B70598B1AB25CE9004BB0FE /* Deep-Learning */,
 				5B70598A1AB25CE9004BB0FE /* Products */,
 			);
