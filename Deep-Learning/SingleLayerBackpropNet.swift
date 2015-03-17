@@ -17,8 +17,6 @@ enum Layer
 class SingleLayerBackpropNet
 {
     // Weights
-//    var firstWeights:Array2D
-//    var secondWeights:Array2D
     var firstWeights:Array2D
     var secondWeights:Array2D
     
@@ -35,11 +33,11 @@ class SingleLayerBackpropNet
     
     var learningRate:Double = 0.1
     
-    init()
+    init(inputNodes:Int, hiddenNodes:Int, outputNodes:Int)
     {
-        self.inputCount = 784
-        self.hiddenCount = 200
-        self.outputCount = 10
+        self.inputCount = inputNodes
+        self.hiddenCount = hiddenNodes
+        self.outputCount = outputNodes
         
         self.inputActivations = Array<Double>(count:inputCount+1, repeatedValue:0)
         self.hiddenActivations = Array<Double>(count:hiddenCount+1, repeatedValue:0)

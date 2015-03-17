@@ -105,4 +105,52 @@ class DataImporter
         
         return dataset
     }
+    
+    func denoiseDataset(dataset:Dataset, noiseFrequency:Double) -> Dataset
+    {
+        var denoisedDataset = Dataset()
+        
+        for instanceIndex in 0..<dataset.instanceCount
+        {
+            let instance = dataset.getInstance(instanceIndex)
+            let originalInput = instance.features
+            
+            var modifiedInput = [Double]()
+            var modifiedOutput = [Double]()
+            
+            for featureIndex in 0..<originalInput.count
+            {
+                var feature = originalInput[featureIndex]
+                modifiedOutput.append(feature)
+                
+                if (randomWithProbability(noiseFrequency))
+                {
+                    modifiedInput.append(feature*randNormalizedDouble())
+                }
+                else
+                {
+                    modifiedInput.append(feature)
+                }
+            }
+            
+            denoisedDataset.addInstance(modifiedInput, outputVector:modifiedOutput)
+        }
+        
+        return denoisedDataset
+    }
+    
+    func randRange (lower:Int , upper:Int) -> Int {
+        return lower + Int(arc4random_uniform(UInt32(upper - lower + 1)))
+    }
+    
+    func randNormalizedDouble() -> Double {
+        let randInt = randRange(0, upper:1000)
+        return Double(randInt)/1000.0
+    }
+    
+    func randomWithProbability(probability:Double) -> Bool
+    {
+        let randInt = randRange(0, upper:100)
+        return Double(randInt)/100.0 < probability
+    }
 }
