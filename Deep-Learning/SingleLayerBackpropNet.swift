@@ -132,6 +132,51 @@ class SingleLayerBackpropNet
     }
     
     //////////////////////////////////////////////////////////////////////////////////////////
+    // Maximal Activation
+    //////////////////////////////////////////////////////////////////////////////////////////
+    
+    func maximalInputsForHiddenNodes() -> [[Float]]
+    {
+        var hiddenNodeInputs = [[Float]]()
+        
+            for hiddenIndex in 0..<10
+//        for hiddenIndex in 0..<hiddenCount
+        {
+            println("calculating maximal input for hidden node: \(hiddenIndex)")
+            hiddenNodeInputs.append(maximalInputVectorForHiddenNode(hiddenIndex))
+        }
+        
+        return hiddenNodeInputs
+    }
+    
+    func maximalInputVectorForHiddenNode(nodeIndex:Int) -> [Float]
+    {
+        var maximalInputVector = Array<Float>(count:inputCount, repeatedValue:0)
+        
+        for inputIndex in 0..<inputCount
+        {
+            maximalInputVector[inputIndex] = maximalInputForHiddenNode(nodeIndex, inputIndex:inputIndex)
+        }
+        
+        return maximalInputVector
+    }
+    
+    func maximalInputForHiddenNode(nodeIndex:Int, inputIndex:Int) -> Float
+    {
+        let weight = getWeight(.Input, fromIndex:inputIndex, toIndex:nodeIndex)
+        
+        var sumSquaredWeight:Float = 0
+        for i in 0..<inputCount
+        {
+            let inputWeight = getWeight(.Input, fromIndex:i, toIndex:nodeIndex)
+            let squaredInputWeight = Float(pow(Double(inputWeight), 2))
+            sumSquaredWeight += squaredInputWeight
+        }
+        
+        return Float(weight) / Float(sqrt(Double(sumSquaredWeight)))
+    }
+    
+    //////////////////////////////////////////////////////////////////////////////////////////
     // Training
     //////////////////////////////////////////////////////////////////////////////////////////
     
@@ -139,13 +184,14 @@ class SingleLayerBackpropNet
     {
         for epoch in 0..<maxEpochs
         {
-            for index in 0..<trainSet.instanceCount
+            for index in 0..<2
+//            for index in 0..<trainSet.instanceCount
             {
                 println("training on instance: \(index)")
                 trainOnInstance(trainSet.getInstance(index))
             }
             
-            println("epoch \(epoch): \(classificationAccuracy(testSet))")
+//            println("epoch \(epoch): \(classificationAccuracy(testSet))")
         }
     }
     
