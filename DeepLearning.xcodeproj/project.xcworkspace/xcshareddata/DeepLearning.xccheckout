@@ -5,16 +5,16 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>D78AFF90-101B-4174-8F6D-114D487CE28A</string>
+	<string>65180874-616A-4696-AEEE-4B501F4DE7FE</string>
 	<key>IDESourceControlProjectName</key>
-	<string>Deep-Learning</string>
+	<string>DeepLearning</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>787141B417953D82F7B3A11F7356524DA836372B</key>
 		<string>https://github.com/Runemark/deep-learning.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Deep-Learning.xcodeproj</string>
+	<string>DeepLearning.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>787141B417953D82F7B3A11F7356524DA836372B</key>

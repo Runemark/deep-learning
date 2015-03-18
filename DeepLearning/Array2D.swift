@@ -12,7 +12,7 @@ import Foundation
 class Array2D
 {
     var cols:Int, rows:Int
-    var matrix:[Double]
+    var matrix:[Float]
     
     init(cols:Int, rows:Int) {
         self.cols = cols
@@ -20,7 +20,7 @@ class Array2D
         matrix = Array(count:cols*rows, repeatedValue:0)
     }
     
-    subscript(row:Int, col:Int) -> Double {
+    subscript(row:Int, col:Int) -> Float {
         get
         {
             return matrix[cols * row + col]
@@ -31,9 +31,9 @@ class Array2D
         }
     }
     
-    func getRow(rowIndex:Int) -> [Double]
+    func getRow(rowIndex:Int) -> [Float]
     {
-        var row = [Double]()
+        var row = [Float]()
         for colIndex in 0..<cols
         {
             row.append(matrix[cols*rowIndex + colIndex])
@@ -42,9 +42,9 @@ class Array2D
         return row
     }
     
-    func getCol(colIndex:Int) -> [Double]
+    func getCol(colIndex:Int) -> [Float]
     {
-        var col = [Double]()
+        var col = [Float]()
         for rowIndex in 0..<rows
         {
             col.append(matrix[cols*rowIndex + colIndex])
@@ -53,7 +53,7 @@ class Array2D
         return col
     }
     
-    func toVector() -> [Double]
+    func toVector() -> [Float]
     {
         return matrix
     }

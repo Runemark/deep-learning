@@ -17,19 +17,17 @@ class File {
 
 class DataImporter
 {
-    func importArffFile(fileName:String) -> Dataset
+    func importArffFile(fileName:String, autoencode:Bool) -> Dataset
     {
-        var directory = "\(NSHomeDirectory())/Documents/Research/deep-learning/Data/\(fileName).arff"
-        
         var dataset = Dataset()
         
-        if let loadedData = String(contentsOfFile:directory, encoding:NSUTF8StringEncoding, error:nil)
+        var fileURL = NSBundle.mainBundle().URLForResource(fileName, withExtension:"arff")
+        if let loadedData = String(contentsOfURL:fileURL!, encoding:NSUTF8StringEncoding, error:nil)
         {
             let lines = loadedData.componentsSeparatedByString("\n")
             
             var dataSection = false
             var featureCount = 0
-            
             var instanceCount = 0
             var classCount = 0
             
@@ -38,28 +36,37 @@ class DataImporter
                 if (dataSection && !line.isEmpty)
                 {
                     let components = line.componentsSeparatedByString(",")
-                    var instance = (features:[Double](), targets:[Double]())
+                    var instanceFeatures = [Float]()
+                    var instanceTargets = [Float]()
                     
-                    for (index:Int, element:String) in enumerate(components)
+                    for index in 0..<components.count
                     {
-                        // Should be a number from 0 to 255
-                        if let value = element.toInt()
+                        let element = components[index]
+                        let value:Int? = element.toInt()
+                        
+                        if value != nil
                         {
                             if (index < featureCount)
                             {
-                                instance.features.append(Double(value)/255.0)
+                                let normalizedValue = Float(value!)/Float(255.0)
+                                instanceFeatures.append(normalizedValue)
+                                
+                                if (autoencode)
+                                {
+                                    instanceTargets.append(normalizedValue)
+                                }
                             }
-                            else
+                            else if (!autoencode)
                             {
                                 for n in 0..<classCount
                                 {
                                     if n == value
                                     {
-                                        instance.targets.append(Double(1))
+                                        instanceTargets.append(Float(1.0))
                                     }
                                     else
                                     {
-                                        instance.targets.append(Double(0))
+                                        instanceTargets.append(Float(0.0))
                                     }
                                 }
                             }
@@ -73,7 +80,7 @@ class DataImporter
                         println("loading instance: \(instanceCount)")
                     }
                     
-                    dataset.addInstance(instance.features, outputVector:instance.targets)
+                    dataset.addInstance(instanceFeatures, outputVector:instanceTargets)
                 }
                 else
                 {
@@ -94,13 +101,6 @@ class DataImporter
                     }
                 }
             }
-            
-            println("features: \(featureCount)")
-            println("Data Import Complete")
-        }
-        else
-        {
-            println("file not loaded: \(fileName)")
         }
         
         return dataset
@@ -115,8 +115,8 @@ class DataImporter
             let instance = dataset.getInstance(instanceIndex)
             let originalInput = instance.features
             
-            var modifiedInput = [Double]()
-            var modifiedOutput = [Double]()
+            var modifiedInput = [Float]()
+            var modifiedOutput = [Float]()
             
             for featureIndex in 0..<originalInput.count
             {
@@ -125,7 +125,7 @@ class DataImporter
                 
                 if (randomWithProbability(noiseFrequency))
                 {
-                    modifiedInput.append(feature*randNormalizedDouble())
+                    modifiedInput.append(feature*randNormalizedFloat())
                 }
                 else
                 {
@@ -143,14 +143,14 @@ class DataImporter
         return lower + Int(arc4random_uniform(UInt32(upper - lower + 1)))
     }
     
-    func randNormalizedDouble() -> Double {
+    func randNormalizedFloat() -> Float {
         let randInt = randRange(0, upper:1000)
-        return Double(randInt)/1000.0
+        return Float(randInt)/Float(1000.0)
     }
     
     func randomWithProbability(probability:Double) -> Bool
     {
         let randInt = randRange(0, upper:100)
-        return Double(randInt)/100.0 < probability
+        return Float(randInt)/100.0 < Float(probability)
     }
 }

@@ -20,18 +20,18 @@ class SingleLayerBackpropNet
     var firstWeights:Array2D
     var secondWeights:Array2D
     
-    var inputActivations:[Double]
-    var hiddenActivations:[Double]
-    var outputActivations:[Double]
+    var inputActivations:[Float]
+    var hiddenActivations:[Float]
+    var outputActivations:[Float]
     
-    var outputDeltas:[Double]
-    var hiddenDeltas:[Double]
+    var outputDeltas:[Float]
+    var hiddenDeltas:[Float]
     
     var inputCount:Int
     var hiddenCount:Int
     var outputCount:Int
     
-    var learningRate:Double = 0.1
+    var learningRate:Float = 0.1
     
     init(inputNodes:Int, hiddenNodes:Int, outputNodes:Int)
     {
@@ -39,36 +39,19 @@ class SingleLayerBackpropNet
         self.hiddenCount = hiddenNodes
         self.outputCount = outputNodes
         
-        self.inputActivations = Array<Double>(count:inputCount+1, repeatedValue:0)
-        self.hiddenActivations = Array<Double>(count:hiddenCount+1, repeatedValue:0)
-        self.outputActivations = Array<Double>(count:outputCount, repeatedValue:0)
+        self.inputActivations = Array<Float>(count:inputCount+1, repeatedValue:0)
+        self.hiddenActivations = Array<Float>(count:hiddenCount+1, repeatedValue:0)
+        self.outputActivations = Array<Float>(count:outputCount, repeatedValue:0)
         
-        self.outputDeltas = Array<Double>(count:outputCount, repeatedValue:0)
-        self.hiddenDeltas = Array<Double>(count:hiddenCount, repeatedValue:0)
+        self.outputDeltas = Array<Float>(count:outputCount, repeatedValue:0)
+        self.hiddenDeltas = Array<Float>(count:hiddenCount, repeatedValue:0)
 
         self.firstWeights = Array2D(cols:hiddenCount, rows:inputCount+1)
         self.secondWeights = Array2D(cols:outputCount, rows:hiddenCount+1)
         
+        initializeWeights()
+        
         println("initialization complete")
-    }
-    
-    // Store weights backwards -- first list the destination nodes in rows, with input nodes in cols
-    func initializeWeightSet(rows:Int, cols:Int) -> [[Double]]
-    {
-        var weightSet = [[Double]]()
-        
-        for _ in 0..<rows
-        {
-            var row = [Double]()
-            for _ in 0..<cols
-            {
-                row.append(smallRandomNumber())
-            }
-            
-            weightSet.append(row)
-        }
-        
-        return weightSet
     }
     
     //////////////////////////////////////////////////////////////////////////////////////////
@@ -97,14 +80,14 @@ class SingleLayerBackpropNet
     }
     
     // This method is psecific to the MNIST task
-    func classificationForInstance(features:[Double]) -> Int
+    func classificationForInstance(features:[Float]) -> Int
     {
         calculateActivationsForInstance(features)
         
         // Find the output node with the highest activation
-        var maxActivation:Double = -1.0
+        var maxActivation:Float = -1.0
         var indexWithHighestActivation:Int = -1;
-        for (outputIndex:Int, activation:Double) in enumerate(outputActivations)
+        for (outputIndex:Int, activation:Float) in enumerate(outputActivations)
         {
             if activation > maxActivation
             {
@@ -117,10 +100,10 @@ class SingleLayerBackpropNet
     }
     
     // This method is specific to the MNIST task
-    func targetClassification(targetVector:[Double]) -> Int
+    func targetClassification(targetVector:[Float]) -> Int
     {
         var classificationIndex = -1;
-        for (index:Int, target:Double) in enumerate(targetVector)
+        for (index:Int, target:Float) in enumerate(targetVector)
         {
             if (target == 1.0)
             {
@@ -144,6 +127,7 @@ class SingleLayerBackpropNet
         {
             println("calculating maximal input for hidden node: \(hiddenIndex)")
             hiddenNodeInputs.append(maximalInputVectorForHiddenNode(hiddenIndex))
+            println("done!")
         }
         
         return hiddenNodeInputs
@@ -184,25 +168,23 @@ class SingleLayerBackpropNet
     {
         for epoch in 0..<maxEpochs
         {
-            for index in 0..<2
-//            for index in 0..<trainSet.instanceCount
+            for index in 0..<trainSet.instanceCount
             {
                 println("training on instance: \(index)")
                 trainOnInstance(trainSet.getInstance(index))
             }
-            
 //            println("epoch \(epoch): \(classificationAccuracy(testSet))")
         }
     }
     
-    func trainOnInstance(instance:(features:[Double],targets:[Double]))
+    func trainOnInstance(instance:(features:[Float],targets:[Float]))
     {
         calculateActivationsForInstance(instance.features)
         calculateDeltas(instance.targets)
         applyWeightDeltas()
     }
     
-    func calculateActivationsForInstance(featureVector:[Double])
+    func calculateActivationsForInstance(featureVector:[Float])
     {
         initializeInputAndBiasActivations(featureVector)
         
@@ -217,7 +199,7 @@ class SingleLayerBackpropNet
         }
     }
     
-    func initializeInputAndBiasActivations(featureVector:[Double])
+    func initializeInputAndBiasActivations(featureVector:[Float])
     {
         // Initialize input activations
         
@@ -232,11 +214,11 @@ class SingleLayerBackpropNet
         hiddenActivations[hiddenCount] = 1
     }
     
-    func calculateActivation(layer:Layer, index:Int) -> Double
+    func calculateActivation(layer:Layer, index:Int) -> Float
     {
         if (layer == .Hidden)
         {
-            var net:Double = 0.0
+            var net:Float = 0.0
             for inputIndex in 0...inputCount
             {
                 let weight = getWeight(.Input, fromIndex:inputIndex, toIndex:index)
@@ -251,7 +233,7 @@ class SingleLayerBackpropNet
         }
         else
         {
-            var net:Double = 0.0
+            var net:Float = 0.0
             for hiddenIndex in 0...hiddenCount
             {
                 let weight = getWeight(.Hidden, fromIndex:hiddenIndex, toIndex:index)
@@ -266,9 +248,9 @@ class SingleLayerBackpropNet
         }
     }
     
-    func sigmoid(value:Double) -> Double
+    func sigmoid(value:Float) -> Float
     {
-        return Double(1.0 / (1.0 + pow(M_E, -1 * value)))
+        return Float(1.0 / (Float(1.0) + Float(pow(M_E, Double(-1 * value)))))
     }
     
     func applyWeightDeltas()
@@ -296,7 +278,7 @@ class SingleLayerBackpropNet
         }
     }
     
-    func calculateWeightDelta(fromLayer:Layer, fromIndex:Int, toIndex:Int) -> Double
+    func calculateWeightDelta(fromLayer:Layer, fromIndex:Int, toIndex:Int) -> Float
     {
         var nextLayer:Layer = .Output
         if (fromLayer == .Input)
@@ -307,7 +289,7 @@ class SingleLayerBackpropNet
         return learningRate * getActivation(fromLayer, index:fromIndex) * getDelta(nextLayer, index:toIndex)
     }
     
-    func calculateDeltas(outputVector:[Double])
+    func calculateDeltas(outputVector:[Float])
     {
         for outputIndex in 0..<outputCount
         {
@@ -320,15 +302,15 @@ class SingleLayerBackpropNet
         }
     }
     
-    func calculateOutputDelta(index:Int, target:Double) -> Double
+    func calculateOutputDelta(index:Int, target:Float) -> Float
     {
         let actual = getActivation(.Output, index:index)
-        return (target - actual) * sigmoidDerivative(actual)
+        return Float(target - actual) * sigmoidDerivative(actual)
     }
     
-    func calculateHiddenDelta(index:Int) -> Double
+    func calculateHiddenDelta(index:Int) -> Float
     {
-        var weightedSum:Double = 0.0
+        var weightedSum:Float = 0.0
         for j in 0..<outputCount
         {
             weightedSum += getWeight(.Hidden, fromIndex:index, toIndex:j) * outputDeltas[j]
@@ -338,7 +320,7 @@ class SingleLayerBackpropNet
         return weightedSum * sigmoidDerivative(activation)
     }
     
-    func getActivation(layer:Layer, index:Int) -> Double
+    func getActivation(layer:Layer, index:Int) -> Float
     {
         if (layer == .Input)
         {
@@ -354,7 +336,7 @@ class SingleLayerBackpropNet
         }
     }
     
-    func getDelta(layer:Layer, index:Int) -> Double
+    func getDelta(layer:Layer, index:Int) -> Float
     {
         if (layer == .Output)
         {
@@ -366,7 +348,7 @@ class SingleLayerBackpropNet
         }
     }
     
-    func sigmoidDerivative(value:Double) -> Double
+    func sigmoidDerivative(value:Float) -> Float
     {
         return value * (1 - value)
     }
@@ -375,12 +357,31 @@ class SingleLayerBackpropNet
     // Weights
     //////////////////////////////////////////////////////////////////////////////////////////
     
-    func smallRandomNumber() -> Double
+    func initializeWeights()
     {
-        return ((Double(arc4random()) / Double(UINT32_MAX)) * 0.2) - 0.1
+        for x in 0..<inputCount+1
+        {
+            for y in 0..<hiddenCount
+            {
+                firstWeights[x,y] = smallRandomNumber()
+            }
+        }
+        
+        for x in 0..<hiddenCount+1
+        {
+            for y in 0..<outputCount
+            {
+                secondWeights[x,y] = smallRandomNumber()
+            }
+        }
     }
     
-    func getWeight(fromLayer:Layer, fromIndex:Int, toIndex:Int) -> Double
+    func smallRandomNumber() -> Float
+    {
+        return Float((Double(arc4random()) / Double(UINT32_MAX)) * 0.2) - Float(0.1)
+    }
+    
+    func getWeight(fromLayer:Layer, fromIndex:Int, toIndex:Int) -> Float
     {
         if (fromLayer == .Input)
         {
@@ -392,7 +393,7 @@ class SingleLayerBackpropNet
         }
     }
     
-    func setWeight(fromLayer:Layer, fromIndex:Int, toIndex:Int, value:Double)
+    func setWeight(fromLayer:Layer, fromIndex:Int, toIndex:Int, value:Float)
     {
         if (fromLayer == .Input)
         {

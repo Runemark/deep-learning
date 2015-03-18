@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Deep-Learning.xcscheme</key>
+		<key>DeepLearning.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -12,7 +12,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>5B7059881AB25CE9004BB0FE</key>
+		<key>5BAF0B231AB8E69D0057379B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5BAF0B3B1AB8E69D0057379B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
