@@ -31,7 +31,7 @@ class SingleLayerBackpropNet
     var hiddenCount:Int
     var outputCount:Int
     
-    var learningRate:Float = 0.1
+    var learningRate:Float = 1.0
     
     init(inputNodes:Int, hiddenNodes:Int, outputNodes:Int)
     {
@@ -58,7 +58,7 @@ class SingleLayerBackpropNet
     // Testing
     //////////////////////////////////////////////////////////////////////////////////////////
     
-    func classificationAccuracy(dataset:Dataset) -> Double
+    func classificationAccuracy(dataset:Dataset) -> Float
     {
         let totalInstances = dataset.instanceCount
         var correctlyClassifiedInstances = 0
@@ -76,7 +76,7 @@ class SingleLayerBackpropNet
             }
         }
         
-        return Double(correctlyClassifiedInstances)/Double(totalInstances)
+        return Float(correctlyClassifiedInstances)/Float(totalInstances)
     }
     
     // This method is psecific to the MNIST task
@@ -225,10 +225,6 @@ class SingleLayerBackpropNet
                 net += weight*inputActivations[inputIndex]
             }
             
-            // Do some time tests here!!!
-//            var net = 0.0
-//            vDSP_dotprD(inputActivations, 1, firstWeights.getCol(index), 1, &net, vDSP_Length(inputActivations.count))
-            
             return sigmoid(net)
         }
         else
@@ -240,17 +236,13 @@ class SingleLayerBackpropNet
                 net += weight*hiddenActivations[hiddenIndex]
             }
             
-            // Do some time tests here!!!
-//            var net = 0.0
-//            vDSP_dotprD(hiddenActivations, 1, secondWeights.getCol(index), 1, &net, vDSP_Length(hiddenActivations.count))
-            
             return sigmoid(net)
         }
     }
     
     func sigmoid(value:Float) -> Float
     {
-        return Float(1.0 / (Float(1.0) + Float(pow(M_E, Double(-1 * value)))))
+        return Float(Double(1.0) / (Double(1.0) + pow(M_E, -1 * Double(value))))
     }
     
     func applyWeightDeltas()
@@ -378,7 +370,7 @@ class SingleLayerBackpropNet
     
     func smallRandomNumber() -> Float
     {
-        return Float((Double(arc4random()) / Double(UINT32_MAX)) * 0.2) - Float(0.1)
+        return ((Float(arc4random()) / Float(UINT32_MAX)) * 0.2) - 0.1
     }
     
     func getWeight(fromLayer:Layer, fromIndex:Int, toIndex:Int) -> Float
