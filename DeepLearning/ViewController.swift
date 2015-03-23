@@ -21,29 +21,60 @@ class ViewController: UIViewController {
         println("directory: \(docDirectory)")
         
         var importer = DataImporter()
+        
+        //////////////////////////////////////////////////////////////////////////////////////////
+        // AUTOENCODER
+        //////////////////////////////////////////////////////////////////////////////////////////
+        
 //        var testSet = importer.importArffFile("MNIST_test_500")
-        var trainingSet = importer.importArffFile("MNIST_train_500", autoencode:true)
-
-        var autoEncoder = SingleLayerBackpropNet(inputNodes: 784, hiddenNodes:200, outputNodes:784)
-
-        autoEncoder.trainOnDataset(trainingSet, testSet:trainingSet, maxEpochs:1)
-
-        var maximalInputs = autoEncoder.maximalInputsForHiddenNodes()
+//        var trainingSet = importer.importArffFile("MNIST_train_500", autoencode:true)
+//        
+//        var autoEncoder = SingleLayerBackpropNet(inputNodes: 784, hiddenNodes:500, outputNodes:784)
+//        autoEncoder.trainOnDataset(trainingSet, testSet:trainingSet, maxEpochs:1)
+//        
+//        var maximalInputs = autoEncoder.maximalInputsForHiddenNodes()
         
-        let windowSize = 28
+        //////////////////////////////////////////////////////////////////////////////////////////
         
-        for (index:Int, maximalInput:[Float]) in enumerate(maximalInputs)
-        {
-            var maximalWindow = inputVectorToWindow(maximalInput, width:windowSize, height:windowSize)
-            UIGraphicsBeginImageContextWithOptions(CGSizeMake(CGFloat(windowSize/2), CGFloat(windowSize/2)), true, 0.0)
-            var newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()
-            
-            newImage = newImage.getFilledImage(maximalWindow)!
-
-            let targetPath = docDirectory.stringByAppendingPathComponent("derp\(index).png")
-            UIImagePNGRepresentation(newImage).writeToFile(targetPath, atomically:false)
-            UIGraphicsEndImageContext()
-        }
+        
+        //////////////////////////////////////////////////////////////////////////////////////////
+        // STANDARD BACKPROP (784:200:10)
+        //////////////////////////////////////////////////////////////////////////////////////////
+        var testSet = importer.importArffFile("MNIST_test_500", autoencode:false)
+        var trainingSet = importer.importArffFile("MNIST_train_500", autoencode:false)
+        
+        var standardBackprop = SingleLayerBackpropNet(inputNodes:784, hiddenNodes:200, outputNodes:10)
+        standardBackprop.trainOnDataset(trainingSet, testSet:testSet, maxEpochs:10)
+        //////////////////////////////////////////////////////////////////////////////////////////
+        
+        
+        //////////////////////////////////////////////////////////////////////////////////////////
+        // TEST BACKPROP (2:2:2)
+        //////////////////////////////////////////////////////////////////////////////////////////
+        
+//        var testSet = Dataset()
+//        testSet.addInstance([Float(0.5), Float(0.6)], outputVector:[Float(1.0), Float(0.0)])
+//        testSet.addInstance([Float(0.2), Float(0.3)], outputVector:[Float(0.0), Float(1.0)])
+//        
+//        var standardBackprop = SingleLayerBackpropNet(inputNodes:2, hiddenNodes:2, outputNodes:2)
+//        standardBackprop.trainOnDataset(testSet, testSet:testSet, maxEpochs:1)
+        
+        //////////////////////////////////////////////////////////////////////////////////////////
+        
+//        let windowSize = 28
+//        
+//        for (index:Int, maximalInput:[Float]) in enumerate(maximalInputs)
+//        {
+//            var maximalWindow = inputVectorToWindow(maximalInput, width:windowSize, height:windowSize)
+//            UIGraphicsBeginImageContextWithOptions(CGSizeMake(CGFloat(windowSize/2), CGFloat(windowSize/2)), true, 0.0)
+//            var newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()
+//            
+//            newImage = newImage.getFilledImage(maximalWindow)!
+//
+//            let targetPath = docDirectory.stringByAppendingPathComponent("derp\(index).png")
+//            UIImagePNGRepresentation(newImage).writeToFile(targetPath, atomically:false)
+//            UIGraphicsEndImageContext()
+//        }
         
         println("everything complete")
     }

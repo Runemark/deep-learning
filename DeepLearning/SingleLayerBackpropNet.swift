@@ -173,7 +173,7 @@ class SingleLayerBackpropNet
                 println("training on instance: \(index)")
                 trainOnInstance(trainSet.getInstance(index))
             }
-//            println("epoch \(epoch): \(classificationAccuracy(testSet))")
+            println("epoch \(epoch): \(classificationAccuracy(testSet))")
         }
     }
     

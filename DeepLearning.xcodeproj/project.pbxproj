@@ -23,6 +23,8 @@
 		5BAF0B5C1AB8EDA40057379B /* MNIST_test_500.arff in Resources */ = {isa = PBXBuildFile; fileRef = 5BAF0B5A1AB8EDA40057379B /* MNIST_test_500.arff */; };
 		5BAF0B5D1AB8EDA40057379B /* MNIST_train_500.arff in Resources */ = {isa = PBXBuildFile; fileRef = 5BAF0B5B1AB8EDA40057379B /* MNIST_train_500.arff */; };
 		5BAF0B5F1AB8F2590057379B /* MNIST_train_50.arff in Resources */ = {isa = PBXBuildFile; fileRef = 5BAF0B5E1AB8F2590057379B /* MNIST_train_50.arff */; };
+		FBCCC17E1AC0625E005B6941 /* MNIST_test_1000.arff in Resources */ = {isa = PBXBuildFile; fileRef = FBCCC17D1AC0625E005B6941 /* MNIST_test_1000.arff */; };
+		FBCCC1801AC06263005B6941 /* MNIST_train_1000.arff in Resources */ = {isa = PBXBuildFile; fileRef = FBCCC17F1AC06263005B6941 /* MNIST_train_1000.arff */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,8 @@
 		5BAF0B5A1AB8EDA40057379B /* MNIST_test_500.arff */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MNIST_test_500.arff; sourceTree = "<group>"; };
 		5BAF0B5B1AB8EDA40057379B /* MNIST_train_500.arff */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MNIST_train_500.arff; sourceTree = "<group>"; };
 		5BAF0B5E1AB8F2590057379B /* MNIST_train_50.arff */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MNIST_train_50.arff; sourceTree = "<group>"; };
+		FBCCC17D1AC0625E005B6941 /* MNIST_test_1000.arff */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MNIST_test_1000.arff; sourceTree = "<group>"; };
+		FBCCC17F1AC06263005B6941 /* MNIST_train_1000.arff */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MNIST_train_1000.arff; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +158,8 @@
 				5BAF0B5A1AB8EDA40057379B /* MNIST_test_500.arff */,
 				5BAF0B5B1AB8EDA40057379B /* MNIST_train_500.arff */,
 				5BAF0B5E1AB8F2590057379B /* MNIST_train_50.arff */,
+				FBCCC17D1AC0625E005B6941 /* MNIST_test_1000.arff */,
+				FBCCC17F1AC06263005B6941 /* MNIST_train_1000.arff */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -207,6 +213,7 @@
 				TargetAttributes = {
 					5BAF0B231AB8E69D0057379B = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = 9SDP93X292;
 					};
 					5BAF0B3B1AB8E69D0057379B = {
 						CreatedOnToolsVersion = 6.2;
@@ -240,7 +247,9 @@
 			files = (
 				5BAF0B321AB8E69D0057379B /* Main.storyboard in Resources */,
 				5BAF0B371AB8E69D0057379B /* LaunchScreen.xib in Resources */,
+				FBCCC1801AC06263005B6941 /* MNIST_train_1000.arff in Resources */,
 				5BAF0B5C1AB8EDA40057379B /* MNIST_test_500.arff in Resources */,
+				FBCCC17E1AC0625E005B6941 /* MNIST_test_1000.arff in Resources */,
 				5BAF0B5D1AB8EDA40057379B /* MNIST_train_500.arff in Resources */,
 				5BAF0B5F1AB8F2590057379B /* MNIST_train_50.arff in Resources */,
 				5BAF0B341AB8E69D0057379B /* Images.xcassets in Resources */,
@@ -394,7 +403,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = DeepLearning/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -404,7 +415,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = DeepLearning/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -463,6 +476,7 @@
 				5BAF0B481AB8E69D0057379B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5BAF0B491AB8E69D0057379B /* Build configuration list for PBXNativeTarget "DeepLearningTests" */ = {
 			isa = XCConfigurationList;
@@ -471,6 +485,7 @@
 				5BAF0B4B1AB8E69D0057379B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
