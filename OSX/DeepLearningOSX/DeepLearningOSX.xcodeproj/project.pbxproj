@@ -1,0 +1,272 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FB0414961AC309DF006575A4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0414951AC309DF006575A4 /* main.swift */; };
+		FB0414A21AC30A01006575A4 /* SingleLayerBackpropNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB04149C1AC30A01006575A4 /* SingleLayerBackpropNet.swift */; };
+		FB0414A31AC30A01006575A4 /* DataImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB04149D1AC30A01006575A4 /* DataImporter.swift */; };
+		FB0414A41AC30A01006575A4 /* NetworkExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB04149E1AC30A01006575A4 /* NetworkExporter.swift */; };
+		FB0414A51AC30A01006575A4 /* Dataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB04149F1AC30A01006575A4 /* Dataset.swift */; };
+		FB0414A61AC30A01006575A4 /* Array2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0414A01AC30A01006575A4 /* Array2D.swift */; };
+		FB0414A91AC31294006575A4 /* SingleLayerBackpropNetOptimized.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0414A81AC31294006575A4 /* SingleLayerBackpropNetOptimized.swift */; };
+		FB0414AB1AC314B6006575A4 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB0414AA1AC314B6006575A4 /* Accelerate.framework */; };
+		FB0414AD1AC31825006575A4 /* LayerWeights.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0414AC1AC31825006575A4 /* LayerWeights.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FB0414901AC309DF006575A4 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		FB0414921AC309DF006575A4 /* DeepLearningOSX */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DeepLearningOSX; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB0414951AC309DF006575A4 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		FB04149C1AC30A01006575A4 /* SingleLayerBackpropNet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleLayerBackpropNet.swift; sourceTree = "<group>"; };
+		FB04149D1AC30A01006575A4 /* DataImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataImporter.swift; sourceTree = "<group>"; };
+		FB04149E1AC30A01006575A4 /* NetworkExporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkExporter.swift; sourceTree = "<group>"; };
+		FB04149F1AC30A01006575A4 /* Dataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dataset.swift; sourceTree = "<group>"; };
+		FB0414A01AC30A01006575A4 /* Array2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array2D.swift; sourceTree = "<group>"; };
+		FB0414A81AC31294006575A4 /* SingleLayerBackpropNetOptimized.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleLayerBackpropNetOptimized.swift; sourceTree = "<group>"; };
+		FB0414AA1AC314B6006575A4 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		FB0414AC1AC31825006575A4 /* LayerWeights.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayerWeights.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FB04148F1AC309DF006575A4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB0414AB1AC314B6006575A4 /* Accelerate.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FB0414891AC309DF006575A4 = {
+			isa = PBXGroup;
+			children = (
+				FB0414AA1AC314B6006575A4 /* Accelerate.framework */,
+				FB0414941AC309DF006575A4 /* DeepLearningOSX */,
+				FB0414931AC309DF006575A4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FB0414931AC309DF006575A4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FB0414921AC309DF006575A4 /* DeepLearningOSX */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FB0414941AC309DF006575A4 /* DeepLearningOSX */ = {
+			isa = PBXGroup;
+			children = (
+				FB0414951AC309DF006575A4 /* main.swift */,
+				FB04149C1AC30A01006575A4 /* SingleLayerBackpropNet.swift */,
+				FB0414A81AC31294006575A4 /* SingleLayerBackpropNetOptimized.swift */,
+				FB0414AC1AC31825006575A4 /* LayerWeights.swift */,
+				FB04149D1AC30A01006575A4 /* DataImporter.swift */,
+				FB04149E1AC30A01006575A4 /* NetworkExporter.swift */,
+				FB04149F1AC30A01006575A4 /* Dataset.swift */,
+				FB0414A01AC30A01006575A4 /* Array2D.swift */,
+			);
+			path = DeepLearningOSX;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FB0414911AC309DF006575A4 /* DeepLearningOSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FB0414991AC309DF006575A4 /* Build configuration list for PBXNativeTarget "DeepLearningOSX" */;
+			buildPhases = (
+				FB04148E1AC309DF006575A4 /* Sources */,
+				FB04148F1AC309DF006575A4 /* Frameworks */,
+				FB0414901AC309DF006575A4 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DeepLearningOSX;
+			productName = DeepLearningOSX;
+			productReference = FB0414921AC309DF006575A4 /* DeepLearningOSX */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FB04148A1AC309DF006575A4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Martin Mumford";
+				TargetAttributes = {
+					FB0414911AC309DF006575A4 = {
+						CreatedOnToolsVersion = 6.1;
+					};
+				};
+			};
+			buildConfigurationList = FB04148D1AC309DF006575A4 /* Build configuration list for PBXProject "DeepLearningOSX" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = FB0414891AC309DF006575A4;
+			productRefGroup = FB0414931AC309DF006575A4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FB0414911AC309DF006575A4 /* DeepLearningOSX */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FB04148E1AC309DF006575A4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB0414A91AC31294006575A4 /* SingleLayerBackpropNetOptimized.swift in Sources */,
+				FB0414A31AC30A01006575A4 /* DataImporter.swift in Sources */,
+				FB0414A61AC30A01006575A4 /* Array2D.swift in Sources */,
+				FB0414AD1AC31825006575A4 /* LayerWeights.swift in Sources */,
+				FB0414A51AC30A01006575A4 /* Dataset.swift in Sources */,
+				FB0414961AC309DF006575A4 /* main.swift in Sources */,
+				FB0414A21AC30A01006575A4 /* SingleLayerBackpropNet.swift in Sources */,
+				FB0414A41AC30A01006575A4 /* NetworkExporter.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		FB0414971AC309DF006575A4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		FB0414981AC309DF006575A4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		FB04149A1AC309DF006575A4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		FB04149B1AC309DF006575A4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FB04148D1AC309DF006575A4 /* Build configuration list for PBXProject "DeepLearningOSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FB0414971AC309DF006575A4 /* Debug */,
+				FB0414981AC309DF006575A4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FB0414991AC309DF006575A4 /* Build configuration list for PBXNativeTarget "DeepLearningOSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FB04149A1AC309DF006575A4 /* Debug */,
+				FB04149B1AC309DF006575A4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FB04148A1AC309DF006575A4 /* Project object */;
+}
