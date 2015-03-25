@@ -41,4 +41,15 @@ initialFirstWeights[2,1] = -0.6
 let standardNet = SingleLayerBackpropNet(inputNodes:2, hiddenNodes:2, outputNodes:2, withWeights:true , initialFirstWeights:initialFirstWeights, initialSecondWeights:initialSecondWeights)
 let optimizedNet = SingleLayerBackpropNetOptimized(inputNodes:2, hiddenNodes:2, outputNodes:2, withWeights:true , initialFirstWeights:initialFirstWeights, initialSecondWeights:initialSecondWeights)
 
+let startTime = CFAbsoluteTimeGetCurrent()
+standardNet.trainOnDataset(trainingSet, testSet:trainingSet, maxEpochs:1000)
+let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
+
+let startTime2 = CFAbsoluteTimeGetCurrent()
+optimizedNet.trainOnDataset(trainingSet, testSet:trainingSet, maxEpochs:1000)
+let timeElapsed2 = CFAbsoluteTimeGetCurrent() - startTime2
+
+println("Time elapsed for standard network: \(timeElapsed) s")
+println("Time elapsed for optimized network: \(timeElapsed2) s")
+
 println("derp")

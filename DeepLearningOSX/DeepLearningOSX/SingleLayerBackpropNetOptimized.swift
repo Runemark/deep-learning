@@ -12,8 +12,8 @@ import Accelerate
 class SingleLayerBackpropNetOptimized
 {
     // Weights
-    var firstWeights:Array2D
-    var secondWeights:Array2D
+    var firstWeights:LayerWeights
+    var secondWeights:LayerWeights
     
     var inputActivations:[Float]
     var hiddenActivations:[Float]
@@ -41,9 +41,8 @@ class SingleLayerBackpropNetOptimized
         self.outputDeltas = Array<Float>(count:outputCount, repeatedValue:0)
         self.hiddenDeltas = Array<Float>(count:hiddenCount, repeatedValue:0)
         
-        self.firstWeights = Array2D(cols:hiddenCount, rows:inputCount+1)
-        self.secondWeights = Array2D(cols:outputCount, rows:hiddenCount+1)
-        
+        self.firstWeights = LayerWeights(fromCount:inputCount+1, toCount:hiddenCount)
+        self.secondWeights = LayerWeights(fromCount:hiddenCount+1, toCount:outputCount)
         
         if (!withWeights)
         {
@@ -221,25 +220,17 @@ class SingleLayerBackpropNetOptimized
     {
         if (layer == .Hidden)
         {
-            var net:Float = 0.0
-            for inputIndex in 0...inputCount
-            {
-                let weight = getWeight(.Input, fromIndex:inputIndex, toIndex:index)
-                net += weight*inputActivations[inputIndex]
-            }
+            var net = [Float(0.0)]
+            vDSP_dotpr(firstWeights.weightsTo(index), 1, inputActivations, 1, &net, vDSP_Length(inputCount+1))
             
-            return sigmoid(net)
+            return sigmoid(net[0])
         }
         else
         {
-            var net:Float = 0.0
-            for hiddenIndex in 0...hiddenCount
-            {
-                let weight = getWeight(.Hidden, fromIndex:hiddenIndex, toIndex:index)
-                net += weight*hiddenActivations[hiddenIndex]
-            }
+            var net = [Float(0.0)]
+            vDSP_dotpr(secondWeights.weightsTo(index), 1, hiddenActivations, 1, &net, vDSP_Length(inputCount+1))
             
-            return sigmoid(net)
+            return sigmoid(net[0])
         }
     }
     

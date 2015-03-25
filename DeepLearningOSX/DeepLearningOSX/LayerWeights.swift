@@ -11,17 +11,17 @@ class LayerWeights
 {
     var cols:Int, rows:Int
     var matrix = [[Float]]() // [from][to]
-    var reverseMatrix = [[Float]]() // [to][from]
+    var transpose = [[Float]]() // [to][from]
     
     init(fromCount:Int, toCount:Int) {
         
-        self.cols = cols
-        self.rows = rows
+        self.cols = toCount
+        self.rows = fromCount
         
         for rowIndex in 0..<rows
         {
             matrix.append([Float()])
-            for colIndex in 0..<cols
+            for colIndex in 0..<cols-1
             {
                 matrix[rowIndex].append(Float(0))
             }
@@ -29,12 +29,22 @@ class LayerWeights
         
         for colIndex in 0..<cols
         {
-            reverseMatrix.append([Float()])
-            for rowIndex in 0..<rows
+            transpose.append([Float()])
+            for rowIndex in 0..<rows-1
             {
-                matrix[colIndex].append(Float(0))
+                transpose[colIndex].append(Float(0))
             }
         }
+    }
+    
+    func weightsFrom(index:Int) -> [Float]
+    {
+        return matrix[index]
+    }
+    
+    func weightsTo(index:Int) -> [Float]
+    {
+        return transpose[index]
     }
     
     subscript(from:Int, to:Int) -> Float {
@@ -45,7 +55,7 @@ class LayerWeights
         set
         {
             matrix[from][to] = newValue
-            reverseMatrix[to][from] = newValue
+            transpose[to][from] = newValue
         }
     }
     
