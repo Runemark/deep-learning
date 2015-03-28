@@ -18,7 +18,7 @@ extension String {
     }
 }
 
-class NetworkExporter
+class NetworkIO
 {
     init()
     {
@@ -82,17 +82,115 @@ class NetworkExporter
         return exportString
     }
     
-//    func transformationLayerFromWeights(weightString:String) -> TransformationLayer
-//    {
-//        // Takes an input and transforms it into a new space. CANNOT UPDATE.
-                // // In order to update, you must add this layer to an updatable network. This LAYER IS UNLOCKABLE.
-//    }
+    func networkFromFile(fileName:NSString) -> SingleLayerBackpropNet?
+    {
+        var directory = "\(NSHomeDirectory())/Documents/Academics/CS678-NeuralNetworks/Project2-DeepLearning/SavedNets/\(fileName).txt"
+        
+        var dataset = Dataset()
+        
+        if let loadedData = String(contentsOfFile:directory, encoding:NSUTF8StringEncoding, error:nil)
+        {
+            return networkFromWeights(loadedData)
+        }
+        
+        return nil
+    }
+    
+    func halfNetworkFromFile(fileName:NSString) -> TransformLayer?
+    {
+        var directory = "\(NSHomeDirectory())/Documents/Academics/CS678-NeuralNetworks/Project2-DeepLearning/SavedNets/\(fileName).txt"
+        
+        var dataset = Dataset()
+        
+        if let loadedData = String(contentsOfFile:directory, encoding:NSUTF8StringEncoding, error:nil)
+        {
+            return halfNetworkFromWeights(loadedData)
+        }
+        
+        return nil
+    }
+    
+    func halfNetworkFromWeights(weightString:String) -> TransformLayer?
+    {
+        let lines = weightString.componentsSeparatedByString("\n")
+        if (lines.count > 0)
+        {
+            var inputCount = 0
+            var hiddenCount = 0
+            var outputCount = 0
+            
+            var weightSet:WeightSet = .first
+            var fromNodeIndex = 0
+            var toNodeIndex = 0
+            
+            let metadata = lines[0]
+            let metadataComponents = metadata.componentsSeparatedByString(":")
+            
+            if let inputCountValue = metadataComponents[1].toInt()
+            {
+                inputCount = inputCountValue
+            }
+            
+            if let hiddenCountValue = metadataComponents[2].toInt()
+            {
+                hiddenCount = hiddenCountValue
+            }
+            
+            if let outputCountValue = metadataComponents[3].toInt()
+            {
+                outputCount = outputCountValue
+            }
+            
+            if (inputCount > 0 && hiddenCount > 0 && outputCount > 0)
+            {
+                let net = TransformLayer(inputNodes:inputCount, hiddenNodes:hiddenCount, withWeights:false, initialFirstWeights:Array2D(cols:1, rows:1))
+                
+                for line in lines
+                {
+                    let lineCompareString = line as NSString
+                    
+                    if lineCompareString.containsString("weights")
+                    {
+                        if lineCompareString.containsString("second")
+                        {
+                            weightSet = .second
+                        }
+                    }
+                    else if lineCompareString.containsString("metadata")
+                    {
+                        // ignore
+                    }
+                    else
+                    {
+                        // node string
+                        let weightComponents = line.componentsSeparatedByString(",")
+                        // Each node string is a list of weights from the source node to each of the destination nodes on a particular layer
+                        
+                        for weightComponent in weightComponents
+                        {
+                            let weightValue:Float = weightComponent.floatValue
+                            
+                            if (weightSet == .first)
+                            {
+                                net.firstWeights[fromNodeIndex,toNodeIndex] = weightValue
+                            }
+                            
+                            toNodeIndex++
+                        }
+                        
+                        fromNodeIndex++
+                    }
+                }
+                
+                return net
+            }
+        }
+        
+        return nil
+    }
     
     func networkFromWeights(weightString:String) -> SingleLayerBackpropNet?
     {
-        // Parse out the metadata
-        var dataset = Dataset()
-        
         let lines = weightString.componentsSeparatedByString("\n")
         if (lines.count > 0)
         {

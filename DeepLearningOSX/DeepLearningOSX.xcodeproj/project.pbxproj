@@ -7,15 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A8B77801AC59B350059F1F7 /* SingleLayerPerceptron.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8B777F1AC59B350059F1F7 /* SingleLayerPerceptron.swift */; };
+		2A8B77821AC59C5E0059F1F7 /* TransformLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8B77811AC59C5E0059F1F7 /* TransformLayer.swift */; };
+		2A8B77861AC5A2600059F1F7 /* StackedNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8B77851AC5A2600059F1F7 /* StackedNet.swift */; };
 		FB0414961AC309DF006575A4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0414951AC309DF006575A4 /* main.swift */; };
 		FB0414A21AC30A01006575A4 /* SingleLayerBackpropNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB04149C1AC30A01006575A4 /* SingleLayerBackpropNet.swift */; };
-		FB0414A31AC30A01006575A4 /* DataImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB04149D1AC30A01006575A4 /* DataImporter.swift */; };
-		FB0414A41AC30A01006575A4 /* NetworkExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB04149E1AC30A01006575A4 /* NetworkExporter.swift */; };
+		FB0414A31AC30A01006575A4 /* DataIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB04149D1AC30A01006575A4 /* DataIO.swift */; };
+		FB0414A41AC30A01006575A4 /* NetworkIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB04149E1AC30A01006575A4 /* NetworkIO.swift */; };
 		FB0414A51AC30A01006575A4 /* Dataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB04149F1AC30A01006575A4 /* Dataset.swift */; };
 		FB0414A61AC30A01006575A4 /* Array2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0414A01AC30A01006575A4 /* Array2D.swift */; };
-		FB0414A91AC31294006575A4 /* SingleLayerBackpropNetOptimized.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0414A81AC31294006575A4 /* SingleLayerBackpropNetOptimized.swift */; };
 		FB0414AB1AC314B6006575A4 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB0414AA1AC314B6006575A4 /* Accelerate.framework */; };
-		FB0414AD1AC31825006575A4 /* LayerWeights.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0414AC1AC31825006575A4 /* LayerWeights.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,16 +32,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2A8B777F1AC59B350059F1F7 /* SingleLayerPerceptron.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleLayerPerceptron.swift; sourceTree = "<group>"; };
+		2A8B77811AC59C5E0059F1F7 /* TransformLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformLayer.swift; sourceTree = "<group>"; };
+		2A8B77851AC5A2600059F1F7 /* StackedNet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackedNet.swift; sourceTree = "<group>"; };
 		FB0414921AC309DF006575A4 /* DeepLearningOSX */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DeepLearningOSX; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB0414951AC309DF006575A4 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		FB04149C1AC30A01006575A4 /* SingleLayerBackpropNet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleLayerBackpropNet.swift; sourceTree = "<group>"; };
-		FB04149D1AC30A01006575A4 /* DataImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataImporter.swift; sourceTree = "<group>"; };
-		FB04149E1AC30A01006575A4 /* NetworkExporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkExporter.swift; sourceTree = "<group>"; };
+		FB04149D1AC30A01006575A4 /* DataIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataIO.swift; sourceTree = "<group>"; };
+		FB04149E1AC30A01006575A4 /* NetworkIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkIO.swift; sourceTree = "<group>"; };
 		FB04149F1AC30A01006575A4 /* Dataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dataset.swift; sourceTree = "<group>"; };
 		FB0414A01AC30A01006575A4 /* Array2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array2D.swift; sourceTree = "<group>"; };
-		FB0414A81AC31294006575A4 /* SingleLayerBackpropNetOptimized.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleLayerBackpropNetOptimized.swift; sourceTree = "<group>"; };
 		FB0414AA1AC314B6006575A4 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
-		FB0414AC1AC31825006575A4 /* LayerWeights.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayerWeights.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,10 +79,11 @@
 			children = (
 				FB0414951AC309DF006575A4 /* main.swift */,
 				FB04149C1AC30A01006575A4 /* SingleLayerBackpropNet.swift */,
-				FB0414A81AC31294006575A4 /* SingleLayerBackpropNetOptimized.swift */,
-				FB0414AC1AC31825006575A4 /* LayerWeights.swift */,
-				FB04149D1AC30A01006575A4 /* DataImporter.swift */,
-				FB04149E1AC30A01006575A4 /* NetworkExporter.swift */,
+				2A8B77851AC5A2600059F1F7 /* StackedNet.swift */,
+				2A8B77811AC59C5E0059F1F7 /* TransformLayer.swift */,
+				2A8B777F1AC59B350059F1F7 /* SingleLayerPerceptron.swift */,
+				FB04149D1AC30A01006575A4 /* DataIO.swift */,
+				FB04149E1AC30A01006575A4 /* NetworkIO.swift */,
 				FB04149F1AC30A01006575A4 /* Dataset.swift */,
 				FB0414A01AC30A01006575A4 /* Array2D.swift */,
 			);
@@ -143,14 +146,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB0414A91AC31294006575A4 /* SingleLayerBackpropNetOptimized.swift in Sources */,
-				FB0414A31AC30A01006575A4 /* DataImporter.swift in Sources */,
+				2A8B77861AC5A2600059F1F7 /* StackedNet.swift in Sources */,
+				2A8B77821AC59C5E0059F1F7 /* TransformLayer.swift in Sources */,
+				FB0414A31AC30A01006575A4 /* DataIO.swift in Sources */,
 				FB0414A61AC30A01006575A4 /* Array2D.swift in Sources */,
-				FB0414AD1AC31825006575A4 /* LayerWeights.swift in Sources */,
 				FB0414A51AC30A01006575A4 /* Dataset.swift in Sources */,
 				FB0414961AC309DF006575A4 /* main.swift in Sources */,
+				2A8B77801AC59B350059F1F7 /* SingleLayerPerceptron.swift in Sources */,
 				FB0414A21AC30A01006575A4 /* SingleLayerBackpropNet.swift in Sources */,
-				FB0414A41AC30A01006575A4 /* NetworkExporter.swift in Sources */,
+				FB0414A41AC30A01006575A4 /* NetworkIO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +269,7 @@
 				FB04149B1AC309DF006575A4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

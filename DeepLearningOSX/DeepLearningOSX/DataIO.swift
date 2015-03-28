@@ -8,11 +8,65 @@
 
 import Foundation
 
-class DataImporter
+class DataIO
 {
-    func importArffFile(fileName:String, autoencode:Bool) -> Dataset
+    func transformData(dataset:Dataset, network:TransformLayer) -> Dataset
     {
-        var directory = "\(NSHomeDirectory())/Desktop/deep-learning/Data/\(fileName).arff"
+        // Transformation
+        var transformedSet = Dataset()
+        for instanceIndex in 0..<dataset.instanceCount
+        {
+            println("transforming instance \(instanceIndex)")
+            let oldInstance = dataset.getInstance(instanceIndex)
+            network.calculateActivationsForInstance(oldInstance.features)
+            transformedSet.addInstance(network.hiddenActivations, outputVector:oldInstance.targets)
+        }
+        
+        return transformedSet
+    }
+    
+    func exportArffFile(dataset:Dataset) -> String
+    {
+        var exportString = "@RELATION DATA=train-images.idx3-ubyte-LABELS=train-labels.idx1-ubyte\n\n"
+        
+        for attributeIndex in 1...dataset.getInstance(0).features.count
+        {
+            exportString += "@ATTRIBUTE f\(attributeIndex)  real\n"
+        }
+        
+        exportString += "@ATTRIBUTE class {0,1,2,3,4,5,6,7,8,9}\n\n"
+        exportString += "@DATA\n"
+        
+        for instanceIndex in 0..<dataset.instanceCount
+        {
+            let instance = dataset.getInstance(instanceIndex)
+            var instanceString = ""
+            for featureIndex in 0..<instance.features.count
+            {
+                let normalizedFeature = instance.features[featureIndex]
+                let unnormalizedFeature = Int(floor(normalizedFeature*255))
+                instanceString += "\(unnormalizedFeature),"
+            }
+            
+            var outputClass = 0
+            for outputIndex in 0..<instance.targets.count
+            {
+                if (instance.targets[outputIndex] == 1.0)
+                {
+                    outputClass = outputIndex
+                }
+            }
+            
+            instanceString += "\(outputClass)\n"
+            exportString += instanceString
+        }
+        
+        return exportString
+    }
+    
+    func importArffFile(fileName:String, autoencode:Bool, denoise:Bool, denoisePercent:Double) -> Dataset
+    {
+        var directory = "\(NSHomeDirectory())/Documents/Academics/CS678-NeuralNetworks/Project2-DeepLearning/deep-learning/Data/\(fileName).arff"
         
         var dataset = Dataset()
         
@@ -43,7 +97,15 @@ class DataImporter
                             if (index < featureCount)
                             {
                                 let normalizedValue = Float(value!)/Float(255.0)
-                                instanceFeatures.append(normalizedValue)
+                                
+                                if (denoise && randomWithProbability(denoisePercent))
+                                {
+                                    instanceFeatures.append(Float(0))
+                                }
+                                else
+                                {
+                                    instanceFeatures.append(normalizedValue)
+                                }
                                 
                                 if (autoencode)
                                 {
@@ -100,6 +162,18 @@ class DataImporter
         return dataset
     }
     
+    func variantArray(array:[Float]) -> [Float]
+    {
+        var variantArray = [Float]()
+        
+        for value in array
+        {
+            variantArray.append(value + ((0.1*randNormalizedFloat()) - 0.05))
+        }
+        
+        return variantArray
+    }
+    
     func denoiseDataset(dataset:Dataset, noiseFrequency:Double) -> Dataset
     {
         var denoisedDataset = Dataset()
@@ -119,7 +193,7 @@ class DataImporter
                 
                 if (randomWithProbability(noiseFrequency))
                 {
-                    modifiedInput.append(feature*randNormalizedFloat())
+                    modifiedInput.append(Float(0.0))
                 }
                 else
                 {

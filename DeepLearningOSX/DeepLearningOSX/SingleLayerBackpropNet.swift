@@ -31,7 +31,7 @@ class SingleLayerBackpropNet
     var hiddenCount:Int
     var outputCount:Int
     
-    var learningRate:Float = 1.0
+    var learningRate:Float = 0.25
     
     init(inputNodes:Int, hiddenNodes:Int, outputNodes:Int, withWeights:Bool, initialFirstWeights:Array2D, initialSecondWeights:Array2D)
     {
@@ -172,16 +172,89 @@ class SingleLayerBackpropNet
     // Training
     //////////////////////////////////////////////////////////////////////////////////////////
     
-    func trainOnDataset(trainSet:Dataset, testSet:Dataset, maxEpochs:Int)
+    func trainOnDataset(trainSet:Dataset, maxEpochs:Int, maxInstances:Int)
     {
+        var instanceLimit = maxInstances
+        if (maxInstances < 1 || maxInstances > trainSet.instanceCount)
+        {
+            instanceLimit = trainSet.instanceCount
+        }
+        
         for epoch in 0..<maxEpochs
         {
-            for index in 0..<trainSet.instanceCount
+            for index in 0..<instanceLimit
             {
                 println("training on instance: \(index)")
                 trainOnInstance(trainSet.getInstance(index))
             }
-            println("epoch \(epoch): \(classificationAccuracy(testSet))")
+        }
+    }
+    
+    func learningOverTime(trainSet:Dataset, epochs:Int, testSet:Dataset) -> [Float]
+    {
+        var errors = [Float]()
+        
+        for epochIndex in 0..<epochs
+        {
+            for index in 0..<trainSet.instanceCount
+            {
+                trainOnInstance(trainSet.getInstance(index))
+                if (index % 200 == 0)
+                {
+                    errors.append(testOnDataset(testSet))
+                }
+            }
+        }
+        
+        return errors
+    }
+    
+    func testOnDataset(testSet:Dataset) -> Float
+    {
+        var summedError:Float = 0.0
+        
+        for index in 0..<testSet.instanceCount
+        {
+            calculateActivationsForInstance(testSet.getInstance(index).features)
+            let sse = SSEForTargets(testSet.getInstance(index).targets)
+            println("APE \(index): \(sse)")
+            summedError += sse
+        }
+        
+        let result = summedError/Float(testSet.instanceCount)
+        print("GRAND APE: \(result)")
+        return result
+    }
+    
+    func SSEForTargets(targets:[Float]) -> Float
+    {
+        var error:Float = 0.0
+        
+        for targetIndex in 0..<targets.count
+        {
+            error += pow((targets[targetIndex] - outputActivations[targetIndex]), Float(2.0))
+        }
+        
+        return error
+    }
+    
+    func trainOnDataset(trainSet:Dataset, testSet:Dataset, maxEpochs:Int, maxInstances:Int)
+    {
+        var instanceLimit = maxInstances
+        if (maxInstances < 1 || maxInstances > trainSet.instanceCount)
+        {
+            instanceLimit = trainSet.instanceCount
+        }
+        
+        for epoch in 0..<maxEpochs
+        {
+            
+            for index in 0..<instanceLimit
+            {
+                println("training on instance: \(index)")
+                trainOnInstance(trainSet.getInstance(index))
+            }
+            println("epoch SSE: \(testOnDataset(testSet))")
         }
     }
     
