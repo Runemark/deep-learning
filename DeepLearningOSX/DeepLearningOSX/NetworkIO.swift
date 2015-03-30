@@ -54,11 +54,14 @@ class NetworkIO
                     nodeString += "\(weight),"
                 }
             }
-            exportString += nodeString
+            
+            exportString += nodeString + "\n"
+            
         }
         
         if (!half)
         {
+            exportString += "weights:second\n"
             for hiddenIndex in 0...hiddenCount
             {
                 var nodeString = ""
@@ -66,16 +69,24 @@ class NetworkIO
                 {
                     let weight = secondWeights[hiddenIndex,outputIndex]
                     
-                    if (hiddenIndex == outputCount-1)
-                    {
-                        nodeString += "\(weight),"
-                    }
-                    else
+                    if (outputIndex == outputCount-1)
                     {
                         nodeString += "\(weight)"
                     }
+                    else
+                    {
+                        nodeString += "\(weight),"
+                    }
                 }
-                exportString += nodeString
+                
+                if (hiddenIndex == hiddenCount)
+                {
+                    exportString += nodeString
+                }
+                else
+                {
+                    exportString += nodeString + "\n"
+                }
             }
         }
         
@@ -154,6 +165,8 @@ class NetworkIO
                         if lineCompareString.containsString("second")
                         {
                             weightSet = .second
+                            fromNodeIndex = 0
+                            toNodeIndex = 0
                         }
                     }
                     else if lineCompareString.containsString("metadata")
@@ -165,6 +178,8 @@ class NetworkIO
                         // node string
                         let weightComponents = line.componentsSeparatedByString(",")
                         // Each node string is a list of weights from the source node to each of the destination nodes on a particular layer
+                        
+                        toNodeIndex = 0
                         
                         for weightComponent in weightComponents
                         {
@@ -233,6 +248,8 @@ class NetworkIO
                         if lineCompareString.containsString("second")
                         {
                             weightSet = .second
+                            fromNodeIndex = 0
+                            toNodeIndex = 0
                         }
                     }
                     else if lineCompareString.containsString("metadata")
@@ -244,6 +261,8 @@ class NetworkIO
                         // node string
                         let weightComponents = line.componentsSeparatedByString(",")
                         // Each node string is a list of weights from the source node to each of the destination nodes on a particular layer
+                        
+                        toNodeIndex = 0
                         
                         for weightComponent in weightComponents
                         {

@@ -19,12 +19,19 @@ class DataIO
             println("transforming instance \(instanceIndex)")
             let oldInstance = dataset.getInstance(instanceIndex)
             network.calculateActivationsForInstance(oldInstance.features)
-            transformedSet.addInstance(network.hiddenActivations, outputVector:oldInstance.targets)
+            var newFeatures = [Float]()
+            for hiddenIndex in 0..<network.hiddenActivations.count-1 // The last hiddenActivation is a bias (always 1), so we ignore it
+            {
+                newFeatures.append(network.getActivation(.Hidden, index:hiddenIndex))
+            }
+            
+            transformedSet.addInstance(newFeatures, outputVector:oldInstance.targets)
         }
         
         return transformedSet
     }
     
+    // ONLY WORKS ON MNIST DATASETS (only 1 output, single number between 0 and 9)
     func exportArffFile(dataset:Dataset) -> String
     {
         var exportString = "@RELATION DATA=train-images.idx3-ubyte-LABELS=train-labels.idx1-ubyte\n\n"
@@ -48,14 +55,7 @@ class DataIO
                 instanceString += "\(unnormalizedFeature),"
             }
             
-            var outputClass = 0
-            for outputIndex in 0..<instance.targets.count
-            {
-                if (instance.targets[outputIndex] == 1.0)
-                {
-                    outputClass = outputIndex
-                }
-            }
+            let outputClass = Int(dataset.outputs[instanceIndex][0])
             
             instanceString += "\(outputClass)\n"
             exportString += instanceString
