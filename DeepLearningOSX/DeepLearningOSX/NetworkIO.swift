@@ -158,18 +158,16 @@ class NetworkIO
                 
                 for line in lines
                 {
-                    let lineCompareString = line as NSString
-                    
-                    if lineCompareString.containsString("weights")
+                    if line.rangeOfString("weights") != nil
                     {
-                        if lineCompareString.containsString("second")
+                        if line.rangeOfString("second") != nil
                         {
                             weightSet = .second
                             fromNodeIndex = 0
                             toNodeIndex = 0
                         }
                     }
-                    else if lineCompareString.containsString("metadata")
+                    else if line.rangeOfString("metadata") != nil
                     {
                         // ignore
                     }
@@ -241,18 +239,16 @@ class NetworkIO
                 
                 for line in lines
                 {
-                    let lineCompareString = line as NSString
-                    
-                    if lineCompareString.containsString("weights")
+                    if line.rangeOfString("weights") != nil
                     {
-                        if lineCompareString.containsString("second")
+                        if line.rangeOfString("second") != nil
                         {
                             weightSet = .second
                             fromNodeIndex = 0
                             toNodeIndex = 0
                         }
                     }
-                    else if lineCompareString.containsString("metadata")
+                    else if line.rangeOfString("metadata") != nil
                     {
                         // ignore
                     }

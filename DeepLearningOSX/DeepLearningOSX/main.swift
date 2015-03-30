@@ -11,36 +11,72 @@ import Foundation
 let dataio = DataIO()
 let netio = NetworkIO()
 
-let trainSet = dataio.importArffFile("MNIST_train_1000", autoencode:true, denoise:true, denoisePercent:0.05)
-let testSet = dataio.importArffFile("MNIST_test_500", autoencode:true, denoise:false, denoisePercent:0.00)
-
-// TRAIN FIRST EPOCH ON PLAIN OLD DATA
-let derpNet = SingleLayerBackpropNet(inputNodes:784, hiddenNodes:1000, outputNodes:784, withWeights:false, initialFirstWeights: Array2D(cols:1, rows:1), initialSecondWeights:Array2D(cols:1, rows:1))
-derpNet.trainOnDataset(trainSet, maxEpochs:1, maxInstances:0)
-
-// EXPORT THE NET AFTER FIRST EPOCH
-let firstEpochString = netio.exportWeights(derpNet, half:false)
-firstEpochString.writeToFile("\(NSHomeDirectory())/Documents/Academics/CS678-NeuralNetworks/Project2-DeepLearning/SavedNets/ae1_dn05_h1000_tr1000_lr025_e1.txt", atomically:false, encoding:NSUTF8StringEncoding, error:nil)
-
-// VERIFY THE ACCURACY OF THE FIRST EPOCH
-derpNet.testOnDataset(testSet)
-
-// TRAIN SECOND EPOCH ON PLAIN OLD DATA
-derpNet.trainOnDataset(trainSet, maxEpochs:1, maxInstances:0)
-
-// EXPORT THE NET AFTER SECOND EPOCH
-let secondEpochString = netio.exportWeights(derpNet, half:false)
-secondEpochString.writeToFile("\(NSHomeDirectory())/Documents/Academics/CS678-NeuralNetworks/Project2-DeepLearning/SavedNets/ae1_dn05_h1000_tr1000_lr025_e2.txt", atomically:false, encoding:NSUTF8StringEncoding, error:nil)
-
-// VERIFY THE ACCURACY OF THE SECOND EPOCH
-derpNet.testOnDataset(testSet)
-
-
+//let trainSet = dataio.importArffFile("MNIST_train_1000", autoencode:true, denoise:true, denoisePercent:0.05)
+//let testSet = dataio.importArffFile("MNIST_test_500", autoencode:true, denoise:false, denoisePercent:0.00)
+//
+//// TRAIN FIRST EPOCH ON PLAIN OLD DATA
+//let derpNet = SingleLayerBackpropNet(inputNodes:784, hiddenNodes:1000, outputNodes:784, withWeights:false, initialFirstWeights: Array2D(cols:1, rows:1), initialSecondWeights:Array2D(cols:1, rows:1))
+//derpNet.trainOnDataset(trainSet, maxEpochs:1, maxInstances:0)
+//
+//// EXPORT THE NET AFTER FIRST EPOCH
+//let firstEpochString = netio.exportWeights(derpNet, half:false)
+//firstEpochString.writeToFile("\(NSHomeDirectory())/Documents/Academics/CS678-NeuralNetworks/Project2-DeepLearning/SavedNets/ae1_dn05_h1000_tr1000_lr025_e1.txt", atomically:false, encoding:NSUTF8StringEncoding, error:nil)
+//
+//// VERIFY THE ACCURACY OF THE FIRST EPOCH
+//derpNet.testOnDataset(testSet)
+//
+//// TRAIN SECOND EPOCH ON PLAIN OLD DATA
+//derpNet.trainOnDataset(trainSet, maxEpochs:1, maxInstances:0)
+//
+//// EXPORT THE NET AFTER SECOND EPOCH
+//let secondEpochString = netio.exportWeights(derpNet, half:false)
+//secondEpochString.writeToFile("\(NSHomeDirectory())/Documents/Academics/CS678-NeuralNetworks/Project2-DeepLearning/SavedNets/ae1_dn05_h1000_tr1000_lr025_e2.txt", atomically:false, encoding:NSUTF8StringEncoding, error:nil)
+//
+//// VERIFY THE ACCURACY OF THE SECOND EPOCH
+//derpNet.testOnDataset(testSet)
 
 
 
 
 
+
+//// TRANSFORM THE PLAIN OLD DATA USING THE T1E1 TRANSFORM LAYER
+//
+//let trainData = dataio.importArffFile("MNIST_train_1000", autoencode:false, denoise:false, denoisePercent:0.00)
+let testData = dataio.importArffFile("MNIST_test_500", autoencode:false, denoise:false, denoisePercent:0.00)
+//
+let transformLayer = netio.halfNetworkFromFile("ae1_dn05_h1000_tr1000_lr025_e1")!
+//
+//let transformTrainData = dataio.transformData(trainData, network:transformLayer)
+//
+//// WRITE OUT TRANSFORM TRAIN DATA
+//
+//let transformTrainDatString = dataio.exportArffFile(transformTrainData)
+//transformTrainDatString.writeToFile("\(NSHomeDirectory())/Documents/Academics/CS678-NeuralNetworks/Project2-DeepLearning/deep-learning/Data/T1_1e_Train_1000.arff", atomically:false, encoding:NSUTF8StringEncoding, error:nil)
+//
+//let transformTestData = dataio.transformData(testData, network:transformLayer)
+////
+////// WRITE OUT TRANSFORM TEST DATA
+////
+//let transformTestDataString = dataio.exportArffFile(transformTestData)
+//transformTestDataString.writeToFile("\(NSHomeDirectory())/Documents/Academics/CS678-NeuralNetworks/Project2-DeepLearning/deep-learning/Data/T1_1e_Test_500.arff", atomically:false, encoding:NSUTF8StringEncoding, error:nil)
+//
+//println("derp")
+
+
+// Let's train a standard backprop on the transformed dataset (after 1 epoch)
+
+let trainSet = dataio.importArffFile("T1_1e_Train_1000", autoencode:false, denoise:false, denoisePercent:0.00)
+let testSet = dataio.importArffFile("T1_1e_Test_500", autoencode:false, denoise:false, denoisePercent:0.00)
+
+let standardBackprop = SingleLayerBackpropNet(inputNodes:1000, hiddenNodes:200, outputNodes:10, withWeights:false, initialFirstWeights:Array2D(cols:1, rows:1), initialSecondWeights:Array2D(cols:1, rows:1))
+
+standardBackprop.trainOnDataset(trainSet, testSet:testSet, maxEpochs:5, maxInstances:0)
+
+// EXPORT AND SAVE THE NETWORK ON THE 1E AUTOENCODED DATA
+
+let netString = netio.exportWeights(standardBackprop, half:false)
+netString.writeToFile("\(NSHomeDirectory())/Documents/Academics/CS678-NeuralNetworks/Project2-DeepLearning/SavedNets/bp1_t11etrain1000_5e.txt", atomically:false, encoding:NSUTF8StringEncoding, error:nil)
 
 
 // Tall Order

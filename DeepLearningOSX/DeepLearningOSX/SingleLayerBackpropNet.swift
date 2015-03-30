@@ -254,7 +254,8 @@ class SingleLayerBackpropNet
                 println("training on instance: \(index)")
                 trainOnInstance(trainSet.getInstance(index))
             }
-            println("epoch SSE: \(testOnDataset(testSet))")
+//            println("epoch SSE: \(testOnDataset(testSet))")
+            println("epoch CA: \(classificationAccuracy(testSet))")
         }
     }
     
