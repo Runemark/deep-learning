@@ -10,20 +10,39 @@ import Foundation
 
 class File {
     class func open (path: String, utf8: NSStringEncoding = NSUTF8StringEncoding) -> String? {
-        var error: NSError?
-        return NSFileManager().fileExistsAtPath(path) ? String(contentsOfFile: path, encoding: utf8, error: &error)! : nil
+
+        var loadedData:String
+        do{
+            try loadedData =  String(contentsOfFile:path, encoding:NSUTF8StringEncoding)
+        }
+        catch let error as NSError {
+            print(error.localizedDescription)
+            
+            return nil
+        }
+        return loadedData
+        
     }
+
 }
 
 class DataImporter
 {
     func importArffFile(fileName:String, autoencode:Bool) -> Dataset
     {
-        var dataset = Dataset()
+        let dataset = Dataset()
         
-        var fileURL = NSBundle.mainBundle().URLForResource(fileName, withExtension:"arff")
-        if let loadedData = String(contentsOfURL:fileURL!, encoding:NSUTF8StringEncoding, error:nil)
-        {
+        let fileURL = NSBundle.mainBundle().URLForResource(fileName, withExtension:"arff")
+        var loadedData:String = String()
+        do{
+            try loadedData =  String(contentsOfURL:fileURL!, encoding:NSUTF8StringEncoding)
+        }
+        catch let error as NSError {
+            print(error.localizedDescription)
+
+        }
+
+        
             let lines = loadedData.componentsSeparatedByString("\n")
             
             var dataSection = false
@@ -42,7 +61,7 @@ class DataImporter
                     for index in 0..<components.count
                     {
                         let element = components[index]
-                        let value:Int? = element.toInt()
+                        let value:Int? = Int(element)
                         
                         if value != nil
                         {
@@ -73,11 +92,11 @@ class DataImporter
                         }
                     }
                     
-                    instanceCount++
+                    instanceCount += 1
                     
                     if (instanceCount % 10 == 0)
                     {
-                        println("loading instance: \(instanceCount)")
+                        print("loading instance: \(instanceCount)")
                     }
                     
                     dataset.addInstance(instanceFeatures, outputVector:instanceTargets)
@@ -90,25 +109,25 @@ class DataImporter
                     }
                     else if (line as NSString).containsString("real")
                     {
-                        featureCount++
+                        featureCount += 1
                     }
                     else if (line as NSString).containsString("class")
                     {
                         let classComponents = line.componentsSeparatedByString("{")
-                        let classesString = classComponents[1].stringByReplacingOccurrencesOfString("}", withString:"", options:nil, range:nil)
+                        let classesString = classComponents[1].stringByReplacingOccurrencesOfString("}", withString:"", options:[], range:nil)
                         let classes = classesString.componentsSeparatedByString(",")
                         classCount = classes.count
                     }
                 }
             }
-        }
+        
         
         return dataset
     }
     
     func denoiseDataset(dataset:Dataset, noiseFrequency:Double) -> Dataset
     {
-        var denoisedDataset = Dataset()
+        let denoisedDataset = Dataset()
         
         for instanceIndex in 0..<dataset.instanceCount
         {
@@ -120,7 +139,7 @@ class DataImporter
             
             for featureIndex in 0..<originalInput.count
             {
-                var feature = originalInput[featureIndex]
+                let feature = originalInput[featureIndex]
                 modifiedOutput.append(feature)
                 
                 if (randomWithProbability(noiseFrequency))

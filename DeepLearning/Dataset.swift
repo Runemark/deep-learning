@@ -23,7 +23,7 @@ class Dataset
     {
         inputs.append(inputVector)
         outputs.append(outputVector)
-        instanceCount++
+        instanceCount += 1
     }
     
     func getInstance(index:Int) -> (features:[Float], targets:[Float])

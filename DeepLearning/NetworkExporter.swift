@@ -28,9 +28,9 @@ class NetworkExporter
     // if the half flag is set to true, only the first half of the network is exported (the second half is discarded)
     func exportWeights(network:SingleLayerBackpropNet, half:Bool) -> String
     {
-        var inputCount = network.inputCount
-        var hiddenCount = network.hiddenCount
-        var outputCount = network.outputCount
+        let inputCount = network.inputCount
+        let hiddenCount = network.hiddenCount
+        let outputCount = network.outputCount
         
         let firstWeights = network.firstWeights
         let secondWeights = network.secondWeights
@@ -91,7 +91,7 @@ class NetworkExporter
     func networkFromWeights(weightString:String) -> SingleLayerBackpropNet?
     {
         // Parse out the metadata
-        var dataset = Dataset()
+      //  var dataset = Dataset()
         
         let lines = weightString.componentsSeparatedByString("\n")
         if (lines.count > 0)
@@ -107,17 +107,17 @@ class NetworkExporter
             let metadata = lines[0]
             let metadataComponents = metadata.componentsSeparatedByString(":")
             
-            if let inputCountValue = metadataComponents[1].toInt()
+            if let inputCountValue = Int(metadataComponents[1])
             {
                 inputCount = inputCountValue
             }
             
-            if let hiddenCountValue = metadataComponents[2].toInt()
+            if let hiddenCountValue = Int(metadataComponents[2])
             {
                 hiddenCount = hiddenCountValue
             }
             
-            if let outputCountValue = metadataComponents[3].toInt()
+            if let outputCountValue = Int(metadataComponents[3])
             {
                 outputCount = outputCountValue
             }
@@ -160,10 +160,10 @@ class NetworkExporter
                                 net.secondWeights[fromNodeIndex,toNodeIndex] = weightValue
                             }
                             
-                            toNodeIndex++
+                            toNodeIndex += 1
                         }
                         
-                        fromNodeIndex++
+                        fromNodeIndex += 1
                     }
                 }
                 

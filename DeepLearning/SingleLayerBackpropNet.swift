@@ -51,7 +51,7 @@ class SingleLayerBackpropNet
         
         initializeWeights()
         
-        println("initialization complete")
+        print("initialization complete")
     }
     
     //////////////////////////////////////////////////////////////////////////////////////////
@@ -65,14 +65,14 @@ class SingleLayerBackpropNet
         // Return classification accuracy
         for index in 0..<totalInstances
         {
-            println("testing on instance: \(index)")
+            print("testing on instance: \(index)")
             let instance = dataset.getInstance(index)
             let output = classificationForInstance(instance.features)
             let target = targetClassification(instance.targets)
             
             if (output == target)
             {
-                correctlyClassifiedInstances++
+                correctlyClassifiedInstances += 1
             }
         }
         
@@ -87,7 +87,7 @@ class SingleLayerBackpropNet
         // Find the output node with the highest activation
         var maxActivation:Float = -1.0
         var indexWithHighestActivation:Int = -1;
-        for (outputIndex:Int, activation:Float) in enumerate(outputActivations)
+        for (outputIndex, activation): (Int, Float) in outputActivations.enumerate()
         {
             if activation > maxActivation
             {
@@ -103,7 +103,7 @@ class SingleLayerBackpropNet
     func targetClassification(targetVector:[Float]) -> Int
     {
         var classificationIndex = -1;
-        for (index:Int, target:Float) in enumerate(targetVector)
+        for (index, target): (Int, Float) in targetVector.enumerate()
         {
             if (target == 1.0)
             {
@@ -125,9 +125,9 @@ class SingleLayerBackpropNet
             for hiddenIndex in 0..<10
 //        for hiddenIndex in 0..<hiddenCount
         {
-            println("calculating maximal input for hidden node: \(hiddenIndex)")
+            print("calculating maximal input for hidden node: \(hiddenIndex)")
             hiddenNodeInputs.append(maximalInputVectorForHiddenNode(hiddenIndex))
-            println("done!")
+            print("done!")
         }
         
         return hiddenNodeInputs
@@ -170,10 +170,10 @@ class SingleLayerBackpropNet
         {
             for index in 0..<trainSet.instanceCount
             {
-                println("training on instance: \(index)")
+                print("training on instance: \(index)")
                 trainOnInstance(trainSet.getInstance(index))
             }
-            println("epoch \(epoch): \(classificationAccuracy(testSet))")
+            print("epoch \(epoch): \(classificationAccuracy(testSet))")
         }
     }
     
