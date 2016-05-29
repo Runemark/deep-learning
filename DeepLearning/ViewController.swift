@@ -14,13 +14,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        println("Hello Data")
+        print("Hello Data")
         
-        var docDirectory = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        let docDirectory = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
         
-        println("directory: \(docDirectory)")
+        print("directory: \(docDirectory)")
         
-        var importer = DataImporter()
+        let importer = DataImporter()
         
         //////////////////////////////////////////////////////////////////////////////////////////
         // AUTOENCODER
@@ -40,10 +40,10 @@ class ViewController: UIViewController {
         //////////////////////////////////////////////////////////////////////////////////////////
         // STANDARD BACKPROP (784:200:10)
         //////////////////////////////////////////////////////////////////////////////////////////
-        var testSet = importer.importArffFile("MNIST_test_500", autoencode:false)
-        var trainingSet = importer.importArffFile("MNIST_train_500", autoencode:false)
+        let testSet = importer.importArffFile("MNIST_test_500", autoencode:false)
+        let trainingSet = importer.importArffFile("MNIST_train_500", autoencode:false)
         
-        var standardBackprop = SingleLayerBackpropNet(inputNodes:784, hiddenNodes:200, outputNodes:10)
+        let standardBackprop = SingleLayerBackpropNet(inputNodes:784, hiddenNodes:200, outputNodes:10)
         standardBackprop.trainOnDataset(trainingSet, testSet:testSet, maxEpochs:10)
         //////////////////////////////////////////////////////////////////////////////////////////
         
@@ -76,12 +76,12 @@ class ViewController: UIViewController {
 //            UIGraphicsEndImageContext()
 //        }
         
-        println("everything complete")
+        print("everything complete")
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        println("did receive memory warning")
+        print("did receive memory warning")
         // Dispose of any resources that can be recreated.
     }
     
@@ -90,7 +90,7 @@ class ViewController: UIViewController {
     //////////////////////////////////////////////////////////////////////////////////////////
     func inputVectorToWindow(inputVector:[Float], width:Int, height:Int) -> Array2D
     {
-        var window = Array2D(cols:width, rows:height)
+        let window = Array2D(cols:width, rows:height)
         
         for x in 0..<height
         {
